@@ -60,11 +60,16 @@ body {
   }
 }
 
-.zoom-in{
-  opacity: 100;
-  transform: scale(1);
+.prezoom-in{
   transform-origin: center;
-  transition: transform 2s ease-in;
+  transform: scale(1);
+  transition: ease-in-out;
+}
+.zoom-in{
+  
+  transform-origin: center;
+  transform: scale(1.5);
+  transition: transform 1.5s ease-in-out;
 }
 
 

@@ -10,11 +10,9 @@ import bgr from '../public/images/bgr.png';
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const [isNavgivating, setIsNavigating] = useState(false);
+  
 
-  const handleDelayNavigation = () => {
-    setIsNavigating(true);
-  }
+  
     setTimeout(() => {
       router.push('/login');
     
@@ -55,7 +53,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="h-screen w-screen flex flex-col items-center justify-center fade-in">
+      <div className="h-screen w-screen flex flex-col items-center justify-center zoom-in">
         
         <Image
           src={logo}
