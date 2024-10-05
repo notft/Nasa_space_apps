@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
     "@syncfusion/ej2-react-dropdowns": "^27.1.51",
+    "cookies-next": "^4.2.1",
     "js-cookie": "^3.0.5",
     "js-cookies": "^1.0.4",
     "lucide-react": "^0.447.0",
