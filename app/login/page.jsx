@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from 'react';
 import Cookies from 'js-cookie'; 
+// import {useRouter, Router} from 'next/navigation';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -93,6 +95,7 @@ function Login() {
                                 type="checkbox" 
                                 id="remember-me" 
                                 className="mr-2" 
+                                
                                 checked={rememberMe} 
                                 onChange={handleRememberMeChange} 
                             />
@@ -112,7 +115,7 @@ function Login() {
                     <div className="pt-4 text-center">
                         <p className="text-gray-700">
                             Don't have an account?{' '}
-                            <a href="#" className="text-[#FF7622] hover:underline">
+                            <a href="/signup" className="text-[#FF7622] hover:underline">
                                 Sign Up
                             </a>
                         </p>
