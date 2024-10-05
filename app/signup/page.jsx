@@ -42,7 +42,7 @@ function Login() {
             id="password"
             type="password"
             className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Renter your password"
+            placeholder="Re-enter your password"
           />
             <div>
                 <button className='uppercase font-bold rounded-xl text-[#ffff] bg-[#FF7622] w-40 h-11'>
