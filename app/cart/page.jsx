@@ -1,7 +1,7 @@
 // pages/cart.js
 "use client"
 import React,{ useState } from 'react';
-
+import Link from 'next/link';
 export default function Cart() {
   // Cart items state (default quantity of 2 for all items)
   const [cartItems, setCartItems] = useState([
@@ -65,7 +65,7 @@ export default function Cart() {
         <div className="bg-white text-black p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-semibold mb-4">RESTAURANT ADDRESS</h2>
           <text>
-            Pala, Choondacherry Sjcet, 686515, Kottayam Kerela
+            Pala, Choondacherry Sjcet, 686515, Kottayam Kerela 
           </text>
             
           
@@ -75,7 +75,7 @@ export default function Cart() {
         <div className="flex flex-col gap-5 justify-center items-center mb-4">
           <p className="text-xl font-semibold">TOTAL: {totalQuantity}</p>
           {/* <a href="#" className="text-orange-500">Breakdown</a> */}
-          <button className="w-[20vw] bg-orange-500 text-white text-xl font-semibold py-4 rounded-lg">PLACE ORDER</button>
+          <button  className="w-[20vw] bg-orange-500 text-white text-xl font-semibold py-4 rounded-lg"><Link href="/review">PLACE ORDER</Link></button>
         </div>
        
       </div>
