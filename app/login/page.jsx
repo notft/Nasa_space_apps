@@ -48,9 +48,7 @@ function Login() {
             const data = await res.json();
             console.log("Login successful", data);
 
-            if (rememberMe) {
-                Cookies.set('session', data.cookie, { expires: 7 });
-            }
+            Cookies.set('session', data.data.cookie, { expires: 30 });
             alert("Login successful");
 
         } catch (e) {

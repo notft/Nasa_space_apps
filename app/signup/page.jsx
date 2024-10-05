@@ -35,9 +35,9 @@ function Login() {
 
                 const data = await res.json();
                 console.log("Login successful", data);
-
-                Cookies.set('userType', userType, { expires: 1 }); 
-                Cookies.set('name', name, { expires: 1 });
+                
+                Cookies.set('session', data.data.cookie, { expires: 30 }); 
+                
                 alert("Sign Up successful. Cookies have been set.");
             } catch (e) {
                 console.log(e);
