@@ -1,22 +1,26 @@
-"use client"
+'use client';
 import Image from "next/image";
-import { useRouter } from "next/router";
-
+import { Router, useRouter } from "next/navigation";
 import react, { useState, useEffect } from 'react';
 import logo from '../public/images/logo.png';
 import bg from '../public/images/bg.png';
 import bgr from '../public/images/bgr.png';
 // import './signup/page';
 
-
 export default function Home() {
-  const router = useRouter();
-  const [IsNavigating, SetIsNavigating] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const [isNavgivating, setIsNavigating] = useState(false);
 
-  const handleDelayedNavigation() => {
-    SetIsNavigating(true);
+  const handleDelayNavigation = () => {
+    setIsNavigating(true);
   }
+    setTimeout(() => {
+      router.push('/login');
+    
+    }, 1500);
+
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
