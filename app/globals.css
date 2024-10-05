@@ -2,9 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html, body {
+  overflow: hidden; /* pverflow issues maybe */
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* -ms-overflow-width: none;
+  -ms-overflow-style: none; */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +31,44 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+.fade-in {
+  opacity: 100; 
+  transform: translateY(20px); 
+  animation: fadeIn ease 1s forwards; 
+}
+
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
+
+
+/* Initial state: element is scaled down and positioned at the corner */
+.zoom-in-top {
+  transform-origin: top left; 
+  transform: scale(0.5) translate(0, 15); 
+  transition: transform 0.7s ease-in; 
+}
+
+.zoom-bottom-right {
+  transform: scale(0.3) translate(0%, 0%); /* Small size and moved to bottom-right */
+  transform-origin: bottom right; /* Transform originates from bottom-right */
+  transition: transform 0.7s ease-in-out;
+}
+
+/* Zoom-in effect: Full size, centered */
+.zoom-in-bottom{
+  transform-origin: bottom right;
+  transform: scale(1) translate(0, 0); 
 }
