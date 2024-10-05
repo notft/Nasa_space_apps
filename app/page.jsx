@@ -13,19 +13,22 @@ export default function Home() {
   
 
   
-    setTimeout(() => {
+  useEffect(() => {
+    const redirectTimeout = setTimeout(() => {
       router.push('/login');
-    
     }, 4000);
 
+    return () => clearTimeout(redirectTimeout); // Cleanup the timeout
+  }, [router]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer); // Cleanup the timeout
   }, []);
+
 
   if (isLoading) {
     return (
