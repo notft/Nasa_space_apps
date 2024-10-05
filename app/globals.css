@@ -45,16 +45,29 @@ body {
 @keyframes fadeIn {
   0% {
     opacity: 0; 
-    transform: translateY(20px); 
+    /* transform: translateY(20px);  */
+  }
+  50% {
+    opacity: 50;
+    transform: scale(50px);
+    transition:  1s ease-in;
   }
   100% {
     opacity: 1;
+    transform: scale(75px);
     transform: translateY(0); 
+    transition: 1.9s ease-in;
   }
 }
 
+.zoom-in{
+  opacity: 100;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 2s ease-in;
+}
 
-/* Initial state: element is scaled down and positioned at the corner */
+
 .zoom-in-top {
   transform-origin: top left; 
   transform: scale(0.5) translate(0, 15); 
@@ -62,12 +75,12 @@ body {
 }
 
 .zoom-bottom-right {
-  transform: scale(0.3) translate(0%, 0%); /* Small size and moved to bottom-right */
-  transform-origin: bottom right; /* Transform originates from bottom-right */
+  transform: scale(0.3) translate(0%, 0%); 
+  transform-origin: bottom right; 
   transition: transform 0.7s ease-in-out;
 }
 
-/* Zoom-in effect: Full size, centered */
+
 .zoom-in-bottom{
   transform-origin: bottom right;
   transform: scale(1) translate(0, 0); 

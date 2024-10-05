@@ -18,13 +18,13 @@ export default function Home() {
     setTimeout(() => {
       router.push('/login');
     
-    }, 1500);
+    }, 4000);
 
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 200);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -55,7 +55,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="h-screen w-screen flex flex-col items-center justify-center zoom-in">
+      <div className="h-screen w-screen flex flex-col items-center justify-center fade-in">
         
         <Image
           src={logo}
