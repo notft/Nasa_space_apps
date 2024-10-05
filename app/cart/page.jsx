@@ -64,13 +64,11 @@ export default function Cart() {
         {/* Restaurant Address */}
         <div className="bg-white text-black p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-semibold mb-4">RESTAURANT ADDRESS</h2>
-          <input
-            type="text"
-            placeholder="Enter your address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="w-full bg-gray-100 p-4 rounded-lg"
-          />
+          <text>
+            Pala, Choondacherry Sjcet, 686515, Kottayam Kerela
+          </text>
+            
+          
         </div>
 
         {/* Total and Place Order */}
