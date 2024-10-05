@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/confeti/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

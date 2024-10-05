@@ -1,12 +1,13 @@
 // pages/upload.js
 "use client"
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 export default function UploadPage() {
   const [image, setImage] = useState(null);
   const [itemName, setItemName] = useState('');
+  const [restaurant, setRestaurant] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [details, setDetails] = useState('');
 
   const handleImageChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
@@ -16,7 +17,7 @@ export default function UploadPage() {
     setImage(null);
     setItemName('');
     setQuantity('');
-    setDetails('');
+    setRestaurant('');
   };
 
   return (
@@ -61,11 +62,11 @@ export default function UploadPage() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Details</label>
-          <textarea
+          <label className="block text-gray-700 font-bold mb-2">Restaurant</label>
+          <input
             placeholder="Enter details"
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
+            value={restaurant}
+            onChange={(e) => setRestaurant(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-black placeholder-black"
           />
         </div>
@@ -76,7 +77,19 @@ export default function UploadPage() {
           >
             Reset
           </button>
-          <button className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600">
+          <button className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600" onClick={() => {fetch("https://hmpp6vkz-8000.inc1.devtunnels.ms/add_item", {
+            method: "POST",
+            headers: {
+              "Conten-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "session": Cookies.get("session"),
+              "name": itemName,
+              "restaurant": restaurant,
+              "quantity": quantity,
+              "image_url": image,
+            })
+          })}}>
             Save Changes
           </button>
         </div>
