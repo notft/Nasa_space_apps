@@ -12,7 +12,7 @@ export default function UploadPage() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file){
-      const imageUrl = URL.createObjectURL(file);
+      const imageUrl = url.createObjectURL(file);
       setImage(imageUrl);
       console.log(imageUrl);
     }

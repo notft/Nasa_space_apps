@@ -26,7 +26,7 @@ export default function Signup() {
 
     if (name && email && password && userType) {
       try {
-        const res = await fetch("https://hmpp6vkz-8000.inc1.devtunnels.ms/signup_user", {
+        const res = await fetch("http://136.185.21.210:26908/signup_user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
