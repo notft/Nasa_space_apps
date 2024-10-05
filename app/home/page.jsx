@@ -78,6 +78,7 @@ export default function HomePage() {
         <h2 className="text-xl font-semibold mb-4 text-black">Open Restaurants</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {restaurants.map((restaurant, index) => (
+            <Link href="/restaurant">
             <div key={index} className="bg-white text-black rounded-lg shadow p-4">
               <div className="w-full h-40 bg-gray-200 text-black rounded-lg mb-4"></div>
               <h3 className="font-semibold mb-2 text-black">{restaurant.name}</h3>
@@ -96,6 +97,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>
