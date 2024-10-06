@@ -4,12 +4,16 @@ import { Search, ChevronRight, Star, Clock, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-
+import png from './all.png';
+import fruits from './fruits.png';
+import meals from './pngegg (2).png';
+import pizza from './pngegg (3).png';
+import h1 from './h1.jpg';
 const categories = [
-  { name: 'All', icon: '' },
-  { name: 'Fruits', icon: '/placeholder.svg' },
-  { name: 'Meals', icon: '/placeholder.svg' },
-  { name: 'Pizza', icon: '/placeholder.svg?height=50&width=50' },
+  { name: 'All', icon: png }, 
+  { name: 'Fruits', icon: fruits }, 
+  { name: 'Meals', icon: meals }, 
+  { name: 'Pizza', icon: pizza }, 
 ];
 
 const restaurants = [
@@ -71,53 +75,58 @@ export default function HomePage() {
           />
         </div>
       </div>
-
       <div className="mb-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl text-black font-semibold">All Categories</h2>
-          <button className="text-gray-500 flex items-center">
-            See All <ChevronRight className="w-4 h-4 ml-1" />
-          </button>
-        </div>
-        <div className="flex space-x-4 overflow-x-auto pb-2">
-          {categories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => setSelectedCategory(category.name)}
-              className={`flex flex-col text-black items-center p-2 rounded-lg ${
-                selectedCategory === category.name ? 'bg-orange-100' : 'bg-gray-100'
-              }`}
-            >
-              <Image src={category.icon} alt={category.name} width={40} height={40} className="mb-2" />
-              <span className="text-sm text-black">{category.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+  <div className="flex justify-between items-center mb-4">
+    <h2 className="text-xl text-black font-semibold">All Categories</h2>
+    <button className="text-gray-500 flex items-center">
+      See All <ChevronRight className="w-4 h-4 ml-1" />
+    </button>
+  </div>
+  <div className="flex space-x-4 overflow-x-auto pb-2">
+    {categories.map((category) => (
+      <button
+        key={category.name}
+        onClick={() => setSelectedCategory(category.name)}
+        className={`flex flex-col justify-between items-center h-24 text-black p-2 rounded-lg ${
+          selectedCategory === category.name ? 'bg-orange-100' : 'bg-gray-100'
+        }`}
+      >
+        <Image src={category.icon} alt={category.name} width={62} height={62} className="mb-2" />
+        <span className="text-sm font-medium text-black mt-auto">{category.name}</span>
+      </button>
+    ))}
+  </div>
+</div>
 
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-4 text-black">Open Restaurants</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {restaurants.map((restaurant, index) => (
             <Link href="/restaurant">
-            <div key={index} className="bg-white text-black rounded-lg shadow p-4">
-              <div className="w-full h-40 bg-gray-200 text-black rounded-lg mb-4"></div>
-              <h3 className="font-semibold mb-2 text-black">{restaurant.name}</h3>
-              <p className="text-sm text-gray-500 mb-2 ">{restaurant.cuisines.join(' • ')}</p>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <Star className="w-4 h-4 text-yellow-400 mr-1" />
-                  <span className="text-sm">{restaurant.rating}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-sm">{restaurant.deliveryFee}</span>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-1" />
-                  <span className="text-sm">{restaurant.deliveryTime}</span>
-                </div>
-              </div>
-            </div>
+           <div key={index} className="bg-white text-black rounded-lg shadow p-4">
+           <Image
+      src={h1}
+      alt="Restaurant Image"
+      width={500}
+      height={160}
+      className="rounded-lg object-cover"
+    />
+  <h3 className="pt-8 font-semibold mb-2 text-black">{restaurant.name}</h3>
+  <p className="text-sm text-gray-500 mb-2">{restaurant.cuisines.join(' • ')}</p>
+  <div className="flex items-center space-x-4">
+    <div className="flex items-center">
+      <Star className="w-4 h-4 text-yellow-400 mr-1" />
+      <span className="text-sm">{restaurant.rating}</span>
+    </div>
+    <div className="flex items-center">
+      <span className="text-sm">{restaurant.deliveryFee}</span>
+    </div>
+    <div className="flex items-center">
+      <Clock className="w-4 h-4 mr-1" />
+      <span className="text-sm">{restaurant.deliveryTime}</span>
+    </div>
+  </div>
+</div>
             </Link>
           ))}
         </div>

@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { Star, Clock, Plus,Ellipsis } from "lucide-react"; // Import Plus icon for the Add button
-
-
+import { Star, Clock, Plus, Ellipsis } from "lucide-react"; // Import Plus icon for the Add button
+import burger from "./pngegg (5).png";
+import h1 from "../home/h1.jpg";
+import Image from 'next/image';
 const restaurants = [
   {
     name: "Rose Garden Restaurant",
@@ -39,7 +40,7 @@ export default function HomePage() {
           </div>
           <div className="relative">
             <div className="w-10 h-10 cursor-pointer bg-gray-200 rounded-full flex items-center justify-center">
-            <Ellipsis className="w-6 h-6 text-orange-500" />
+              <Ellipsis className="w-6 h-6 text-orange-500" />
               {/* Add ellipsis or other icons as needed */}
               {/* <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span> */}
             </div>
@@ -49,10 +50,55 @@ export default function HomePage() {
 
       <div className="mx-auto flex flex-col items-center justify-center">
         <div className="mb-6 flex flex-col justify-center items-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full flex flex-col justify-center items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full ">
             {restaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white w-[85vw] text-black rounded-lg shadow p-4">
-                <div className="w-full h-40 bg-gray-200 text-black rounded-lg mb-4"></div>
+                <div className="w-full h-40 bg-gray-200 text-black rounded-lg mb-4">
+                  <div className="flex flex-row">
+                  <Image
+                    src={h1}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="rounded-lg object-cover"
+                  />
+                  <Image
+                    src={h1}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="rounded-lg object-cover"
+                  />
+                  <Image
+                    src={h1}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="rounded-lg object-cover"
+                  />
+                  <Image
+                    src={h1}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="rounded-lg object-cover"
+                  />
+                  <Image
+                    src={h1}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="rounded-lg object-cover"
+                  />
+                  <Image
+                    src={h1}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="rounded-lg object-cover"
+                  />
+                  </div>
+                </div>
                 <h3 className="font-semibold mb-2 text-black">{restaurant.name}</h3>
                 <p className="text-sm text-gray-500 mb-2">{restaurant.cuisines.join(" • ")}</p>
                 <div className="flex items-center space-x-4">
@@ -68,7 +114,7 @@ export default function HomePage() {
                     <span className="text-sm">{restaurant.deliveryTime}</span>
                   </div>
                 </div>
-                
+
               </div>
             ))}
           </div>
@@ -78,18 +124,26 @@ export default function HomePage() {
             <h1 className="text-2xl text-black font-bold">Items</h1>
           </div>
 
-            {/* Placeholder Section with Tight Spacing */}
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-6 w-full flex justify-center items-center">
+          {/* Placeholder Section with Tight Spacing */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-6 w-full ">
             {placeholders.map((placeholder) => (
               <div
                 key={placeholder.id}
                 className="bg-white shadow-md rounded-xl p-4 w-full md:w-[20vw] text-center relative flex flex-col items-center"
               >
                 {/* Placeholder Image */}
-                <div className="w-full h-32 bg-gray-300 rounded-md mb-4"></div>
+                <div className="w-87 h-32 bg-gray-300 rounded-md mb-4">
+                <Image
+                    src={burger}
+                    alt="Restaurant Image"
+                    width={210}
+                    height={130}
+                    className="rounded-lg object-cover"
+                  />
+                </div>
 
                 {/* Title */}
-                <h2 className="font-semibold text-lg text-black">{placeholder.name}</h2>
+                <h2 className="pt-24 font-semibold text-lg text-black">{placeholder.name}</h2>
 
                 {/* Subtitle */}
                 <p className="text-sm text-gray-500">{placeholder.subtitle}</p>

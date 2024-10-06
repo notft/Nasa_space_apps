@@ -4,7 +4,7 @@
 
 
 html, body {
-  overflow: hidden; /* pverflow issues maybe */
+  overflow-y: scroll; /* pverflow issues maybe */
 }
 
 :root {
