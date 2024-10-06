@@ -1,8 +1,9 @@
 "use client"
 import { useState, useEffect } from 'react';
-import { Search, ChevronRight, Star, Clock, ShoppingBag } from 'lucide-react'; // Keep a single import of ShoppingBag
+import { Search, ChevronRight, Star, Clock, ShoppingBag } from 'lucide-react'; 
 import Image from 'next/image';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 
 const categories = [
   { name: 'All', icon: '' },
@@ -24,14 +25,16 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchName() {
       try {
-        const session = getCookie('session');
+        const session = Cookies.get('session');
         console.log(session);
-        const res = await fetch(`https://hmpp6vkz-8000.inc1.devtunnels.ms/validate?session=${session}`);
+        const res = await fetch(`http://136.185.21.210:26908/validate?session=${session}`);
         const data = await res.json().data.name;
-        setName(data || 'Guest'); // Fallback to 'Guest' if no name is returned
+        console.log(res);
+        setName(data); // Fallback to 'Guest' if no name is returned
+        
       } catch (error) {
         console.error(error);
-        setName('NRO'); // Set fallback name on error
+        setName('NGO'); // Set fallback name on error
       }
     }
 
@@ -42,7 +45,7 @@ export default function HomePage() {
     <div className="mx-auto p-8 bg-white w-screen h-[100vh] md:h-screen overflow-auto">
       <header className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl text-black font-bold">Hey NGO, Good Afternoon!</h1>
+          <h1 className="text-2xl text-black font-bold">Hey {name}, Good Afternoon!</h1>
         </div>
         <Link href='/cart'>
         
