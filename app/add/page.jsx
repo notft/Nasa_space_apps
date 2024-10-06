@@ -1,41 +1,73 @@
 // pages/upload.js
 "use client"
-import { url } from 'inspector';
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 
 export default function UploadPage() {
   const [image, setImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [details, setDetails] = useState('');
+  const [restaurant, setRestaurant] = useState('');
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file){
-      const imageUrl = url.createObjectURL(file);
+      const imageUrl = URL.createObjectURL(file);
       setImage(imageUrl);
       console.log(imageUrl);
+      setSelectedFile(file);
     }
     
   };
-
 
   const handleReset = () => {
     setImage('null');
     setItemName('');
     setQuantity('');
-    setDetails('');
+    setRestaurant('');
   };
-  
-  const handleSaveChanges = () => {  //ividun edutho data
-   
-    console.log('Item Name:', itemName);
-    console.log('Image URL:', image); 
-    console.log('Quantity:', quantity);
-    console.log('Details:', details);
+
+  const handleUpload = async () => {
+    const formdata = new FormData();
+    formdata.append("file", selectedFile);
+
+    try{
+        const req = await fetch('http://136.185.21.210:26908/upload_image', {
+            method: "POST",
+            body: formdata,
+        })
+        const result = await req.json();
+        console.log(req)
+        if (req.ok){
+            const url = result.data.url;
+            const response = await axios.post("http://136.185.21.210:26908/add_item", {
+                "session": Cookies.get("session"),
+                "name" : itemName,
+                "restaurant": restaurant,
+                "quantity": quantity,
+                "image_url": url,
+           },{
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log(response)
+            if (response.ok){
+                alert("Failed");
+            } else {
+                alert("Item added");
+            }
+        }
+    }catch(e){
+        throw new Error(e);
+    }
 
     
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
@@ -79,11 +111,11 @@ export default function UploadPage() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Details</label>
+          <label className="block text-gray-700 font-bold mb-2">Restaurant</label>
           <textarea
-            placeholder="Enter details"
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
+            placeholder="Enter Restaurant"
+            value={restaurant}
+            onChange={(e) => setRestaurant(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-md text-black placeholder-black"
           />
         </div>
@@ -94,7 +126,7 @@ export default function UploadPage() {
           >
             Reset
           </button>
-          <button onClick={handleSaveChanges} className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600">
+          <button onClick={handleUpload} className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600">
             Save Changes
           </button>
         </div>
