@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className="relative">
           <div className="w-10 h-10 cursor-pointer bg-gray-200 rounded-full flex items-center justify-center">
           <ShoppingBag  className="w-6 h-6 text-orange-500" />
-            <span  className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+            {/* <span  className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span> */}
             
           </div>
         

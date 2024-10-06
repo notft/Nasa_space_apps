@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Star, Clock, Plus,Ellipsis } from "lucide-react"; // Import Plus icon for the Add button
-
+import Link from "next/link";
+import { ShoppingBag } from "lucide-react";
 
 const restaurants = [
   {
@@ -28,6 +29,7 @@ export default function HomePage() {
   const handleAddToCart = (itemId) => {
     setCart((prevCart) => [...prevCart, itemId]);
     console.log(`Added item with id: ${itemId} to the cart`);
+    
   };
 
   return (
@@ -38,11 +40,18 @@ export default function HomePage() {
             <h1 className="text-2xl text-black font-bold">Restaurant</h1>
           </div>
           <div className="relative">
-            <div className="w-10 h-10 cursor-pointer bg-gray-200 rounded-full flex items-center justify-center">
-            <Ellipsis className="w-6 h-6 text-orange-500" />
-              {/* Add ellipsis or other icons as needed */}
-              {/* <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span> */}
-            </div>
+          <Link href='/cart'>
+        
+        <div className="relative">
+          <div className="w-10 h-10 cursor-pointer bg-gray-200 rounded-full flex items-center justify-center">
+          <ShoppingBag  className="w-6 h-6 text-orange-500" />
+            {/* <span  className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span> */}
+            
+          </div>
+        
+        </div>
+        
+        </Link>
           </div>
         </header>
       </div>
@@ -100,9 +109,11 @@ export default function HomePage() {
                 {/* Add Button */}
                 <button
                   onClick={() => handleAddToCart(placeholder.id)}
+
                   className="absolute bottom-4 right-4 bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center"
-                >
+                > <Link href="/cart">
                   <Plus className="w-6 h-6" />
+                  </Link>
                 </button>
               </div>
             ))}
