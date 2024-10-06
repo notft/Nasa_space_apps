@@ -5,7 +5,7 @@ This projects connects restaurants and NGOs around the world to ensure minimal f
 This app provides a portal for restaurants to donate their unsold healthy food at the end of the day which can then be found by NGOs and then donated to the poor and needy. 
 as simple as that.
 
-
+##
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
