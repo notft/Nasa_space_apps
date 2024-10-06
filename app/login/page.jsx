@@ -1,8 +1,9 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 export default function Login() {
   const router = useRouter()
@@ -68,39 +69,77 @@ export default function Login() {
   }
 
   return (
-    <div className="h-screen w-screen bg-[#121223]">
-      <div className="pt-24 flex flex-col gap-3 items-center justify-center text-white">
+    <div className="h-screen w-screen bg-[#121223] overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="pt-24 flex flex-col gap-3 items-center justify-center text-white"
+      >
         <h1 className="text-3xl font-bold">LOGIN</h1>
         <h3 className="text-lg">Please sign in to your existing account</h3>
-      </div>
-      <div className="pt-12 mx-auto rounded-xl mt-10 bg-white w-[70vw] md:w-[40vw] flex flex-col items-center justify-center">
+      </motion.div>
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="pt-12 mx-auto rounded-xl mt-10 bg-white w-[70vw] md:w-[40vw] flex flex-col items-center justify-center shadow-lg"
+      >
         <form className="flex mx-auto flex-col items-center justify-center w-full max-w-md p-4" onSubmit={handleSubmit}>
-          {error && <p className="text-red-500 mb-4 w-full text-center">{error}</p>}
-          <label htmlFor="email" className="uppercase text-gray-700 font-semibold mb-2 self-start w-full max-w-md">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="example@gmail.com"
-            disabled={isLoading}
-          />
-          <label htmlFor="password" className="mt-4 uppercase text-gray-700 font-semibold mb-2 self-start w-full max-w-md">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your password"
-            disabled={isLoading}
-          />
-          <div className="flex justify-between w-full max-w-md mb-4">
+          {error && (
+            <motion.p
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-red-500 mb-4 w-full text-center"
+            >
+              {error}
+            </motion.p>
+          )}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="w-full"
+          >
+            <label htmlFor="email" className="uppercase text-gray-700 font-semibold mb-2 block">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              className="bg-[#F0F5FA] rounded-md w-full h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105 focus:scale-105"
+              placeholder="example@gmail.com"
+              disabled={isLoading}
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="w-full"
+          >
+            <label htmlFor="password" className="mt-4 uppercase text-gray-700 font-semibold mb-2 block">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              className="bg-[#F0F5FA] rounded-md w-full h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105 focus:scale-105"
+              placeholder="Enter your password"
+              disabled={isLoading}
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex justify-between w-full mb-4"
+          >
             <div className="flex items-center">
               <input 
                 type="checkbox" 
@@ -114,29 +153,38 @@ export default function Login() {
                 Remember me
               </label>
             </div>
-            <a href="#" className="text-[#FF7622] hover:underline">
+            <a href="#" className="text-[#FF7622] hover:underline transition duration-300 ease-in-out transform hover:scale-105">
               Forgot password?
             </a>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
             <button 
               type="submit" 
-              className="uppercase font-bold rounded-xl text-[#ffff] bg-[#FF7622] w-40 h-11 transition duration-300 ease-in-out hover:bg-[#e56a1f] focus:outline-none focus:ring-2 focus:ring-[#FF7622] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="uppercase font-bold rounded-xl text-[#ffff] bg-[#FF7622] w-40 h-11 transition duration-300 ease-in-out hover:bg-[#e56a1f] focus:outline-none focus:ring-2 focus:ring-[#FF7622] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
               disabled={isLoading}
             >
               {isLoading ? 'Logging In...' : 'Log In'}
             </button>
-          </div>
-          <div className="pt-4 text-center">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="pt-4 text-center"
+          >
             <p className="text-gray-700">
               Don't have an account?{' '}
-              <a href="/signup" className="text-[#FF7622] hover:underline">
+              <a href="/signup" className="text-[#FF7622] hover:underline transition duration-300 ease-in-out transform hover:scale-105 inline-block">
                 Sign Up
               </a>
             </p>
-          </div>
+          </motion.div>
         </form>
-      </div>
+      </motion.div>
     </div>
   )
 }

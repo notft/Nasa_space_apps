@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 export default function Signup() {
   const router = useRouter()
@@ -67,78 +68,111 @@ export default function Signup() {
     }
   }
 
+  const formFields = [
+    { id: 'name', label: 'Name', type: 'text', value: name, onChange: (e) => setName(e.target.value), placeholder: 'John Doe' },
+    { id: 'email', label: 'Email', type: 'email', value: email, onChange: (e) => setEmail(e.target.value), placeholder: 'example@gmail.com' },
+    { id: 'password', label: 'Password', type: 'password', value: password, onChange: (e) => setPassword(e.target.value), placeholder: 'Enter your password' },
+  ]
+
   return (
-    <div className="h-screen w-screen bg-[#121223]">
-      <div className="pt-24 flex flex-col gap-3 items-center justify-center text-white">
+    <div className="h-screen w-screen bg-[#121223] overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="pt-24 flex flex-col gap-3 items-center justify-center text-white"
+      >
         <h1 className="text-3xl font-bold">Sign Up</h1>
         <h3 className="text-lg">Please sign up to get started</h3>
-      </div>
+      </motion.div>
 
-      <div className="pt-12 mx-auto rounded-xl mt-10 bg-white w-[70vw] md:w-[40vw] flex flex-col items-center justify-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="pt-12 mx-auto rounded-xl mt-10 bg-white w-[70vw] md:w-[40vw] flex flex-col items-center justify-center shadow-lg"
+      >
         <form className="flex mx-auto flex-col items-center justify-center w-full max-w-md p-4" onSubmit={handleSubmit}>
-          {error && <p className="text-red-500 mb-4 w-full text-center">{error}</p>}
-          {isSuccess && <p className="text-green-500 mb-4 w-full text-center">Signup successful! Redirecting to login...</p>}
-          <label htmlFor="name" className="uppercase text-gray-700 font-semibold mb-2 self-start w-full max-w-md">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="John Doe"
-            disabled={isLoading}
-          />
-          <label htmlFor="email" className="uppercase text-gray-700 font-semibold mb-2 self-start w-full max-w-md">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="example@gmail.com"
-            disabled={isLoading}
-          />
-          <label htmlFor="password" className="mt-4 uppercase text-gray-700 font-semibold mb-2 self-start w-full max-w-md">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your password"
-            disabled={isLoading}
-          />
+          {error && (
+            <motion.p
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-red-500 mb-4 w-full text-center"
+            >
+              {error}
+            </motion.p>
+          )}
+          {isSuccess && (
+            <motion.p
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-green-500 mb-4 w-full text-center"
+            >
+              Signup successful! Redirecting to login...
+            </motion.p>
+          )}
+          
+          {formFields.map((field, index) => (
+            <motion.div
+              key={field.id}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              className="w-full mb-4"
+            >
+              <label htmlFor={field.id} className="uppercase text-gray-700 font-semibold mb-2 block">
+                {field.label}
+              </label>
+              <input
+                id={field.id}
+                type={field.type}
+                value={field.value}
+                onChange={field.onChange}
+                className="bg-[#F0F5FA] rounded-md w-full h-10 text-gray-600 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105 focus:scale-105"
+                placeholder={field.placeholder}
+                disabled={isLoading}
+              />
+            </motion.div>
+          ))}
 
-          <label htmlFor="userType" className="uppercase text-gray-700 font-semibold mb-2 self-start w-full max-w-md">
-            Select User Type
-          </label>
-          <select
-            id="userType"
-            value={userType}
-            onChange={handleUserTypeChange}
-            className="bg-[#F0F5FA] rounded-md w-full max-w-md h-10 text-gray-600 p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            disabled={isLoading}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="w-full mb-4"
           >
-            <option value="" disabled>Select user type</option>
-            <option value="ngo">NGO</option>
-            <option value="user">Restaurant</option>
-          </select>
+            <label htmlFor="userType" className="uppercase text-gray-700 font-semibold mb-2 block">
+              Select User Type
+            </label>
+            <select
+              id="userType"
+              value={userType}
+              onChange={handleUserTypeChange}
+              className="bg-[#F0F5FA] rounded-md w-full h-10 text-gray-600 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105 focus:scale-105"
+              disabled={isLoading}
+            >
+              <option value="" disabled>Select user type</option>
+              <option value="ngo">NGO</option>
+              <option value="user">Restaurant</option>
+            </select>
+          </motion.div>
 
-          <button 
+          <motion.button 
             type="submit"
-            className="uppercase font-bold rounded-xl text-white bg-[#FF7622] w-40 h-11 transition duration-300 ease-in-out hover:bg-[#e56a1f] focus:outline-none focus:ring-2 focus:ring-[#FF7622] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="uppercase font-bold rounded-xl text-white bg-[#FF7622] w-40 h-11 transition duration-300 ease-in-out hover:bg-[#e56a1f] focus:outline-none focus:ring-2 focus:ring-[#FF7622] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
             disabled={isLoading || isSuccess}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
           >
             {isLoading ? 'Signing Up...' : isSuccess ? 'Success!' : 'Sign Up'}
-          </button>
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </div>
   )
 }
