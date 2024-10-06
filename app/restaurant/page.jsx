@@ -3,7 +3,12 @@ import { useState } from "react";
 import { Star, Clock, Plus, Ellipsis } from "lucide-react"; // Import Plus icon for the Add button
 import burger from "./pngegg (5).png";
 import h1 from "../home/h1.jpg";
+import h2 from "./h2 (1).jpg";
+import h3 from "./h2 (2).jpg";
+import h4 from "./h2 (3).jpg";
 import Image from 'next/image';
+import Link from "next/link";
+import { ShoppingBag } from "lucide-react";
 const restaurants = [
   {
     name: "Rose Garden Restaurant",
@@ -34,16 +39,23 @@ export default function HomePage() {
   return (
     <div className="mx-auto p-8 bg-white w-screen h-[100vh] md:h-screen overflow-auto">
       <div>
-        <header className="flex justify-between items-center mb-6">
+      <header className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl text-black font-bold">Restaurant</h1>
           </div>
           <div className="relative">
-            <div className="w-10 h-10 cursor-pointer bg-gray-200 rounded-full flex items-center justify-center">
-              <Ellipsis className="w-6 h-6 text-orange-500" />
-              {/* Add ellipsis or other icons as needed */}
-              {/* <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span> */}
-            </div>
+          <Link href='/cart'>
+        
+        <div className="relative">
+          <div className="w-10 h-10 cursor-pointer bg-gray-200 rounded-full flex items-center justify-center">
+          <ShoppingBag  className="w-6 h-6 text-orange-500" />
+            {/* <span  className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span> */}
+            
+          </div>
+        
+        </div>
+        
+        </Link>
           </div>
         </header>
       </div>
@@ -53,53 +65,53 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full ">
             {restaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white w-[85vw] text-black rounded-lg shadow p-4">
-                <div className="w-full h-40 bg-gray-200 text-black rounded-lg mb-4">
+                <div className="w-full h-40 text-black rounded-lg mb-4">
                   <div className="flex flex-row">
                   <Image
                     src={h1}
                     alt="Restaurant Image"
                     width={260}
                     height={160}
-                    className="rounded-lg object-cover"
+                    className=" object-cover"
+                  />
+                  <Image
+                    src={h2}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="object-cover"
+                  />
+                  <Image
+                    src={h3}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="object-cover"
+                  />
+                  <Image
+                    src={h4}
+                    alt="Restaurant Image"
+                    width={260}
+                    height={160}
+                    className="object-cover"
                   />
                   <Image
                     src={h1}
                     alt="Restaurant Image"
                     width={260}
                     height={160}
-                    className="rounded-lg object-cover"
+                    className="object-cover"
                   />
                   <Image
-                    src={h1}
+                    src={h2}
                     alt="Restaurant Image"
                     width={260}
                     height={160}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src={h1}
-                    alt="Restaurant Image"
-                    width={260}
-                    height={160}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src={h1}
-                    alt="Restaurant Image"
-                    width={260}
-                    height={160}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src={h1}
-                    alt="Restaurant Image"
-                    width={260}
-                    height={160}
-                    className="rounded-lg object-cover"
+                    className="object-cover"
                   />
                   </div>
                 </div>
-                <h3 className="font-semibold mb-2 text-black">{restaurant.name}</h3>
+                <h3 className="font-semibold mb-2 pt-16 text-black">{restaurant.name}</h3>
                 <p className="text-sm text-gray-500 mb-2">{restaurant.cuisines.join(" • ")}</p>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center">
@@ -129,16 +141,16 @@ export default function HomePage() {
             {placeholders.map((placeholder) => (
               <div
                 key={placeholder.id}
-                className="bg-white shadow-md rounded-xl p-4 w-full md:w-[20vw] text-center relative flex flex-col items-center"
+                className="bg-white shadow-md  p-4 w-full md:w-[20vw] text-center relative flex flex-col items-center"
               >
                 {/* Placeholder Image */}
-                <div className="w-87 h-32 bg-gray-300 rounded-md mb-4">
+                <div className="w-87 h-32 bg-gray-300 mb-4">
                 <Image
                     src={burger}
                     alt="Restaurant Image"
-                    width={210}
+                    width={212}
                     height={130}
-                    className="rounded-lg object-cover"
+                    className="object-cover"
                   />
                 </div>
 
@@ -153,10 +165,13 @@ export default function HomePage() {
 
                 {/* Add Button */}
                 <button
-                  onClick={() => handleAddToCart(placeholder.id)}
-                  className="absolute bottom-4 right-4 bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center"
-                >
-                  <Plus className="w-6 h-6" />
+                   onClick={() => handleAddToCart(placeholder.id)}
+                   className="absolute bottom-4 right-4 bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center"
+                 >
+                 <Link href="/cart">
+                   <Plus className="w-6 h-6" />
+                   </Link>
+                  
                 </button>
               </div>
             ))}
