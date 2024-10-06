@@ -4,6 +4,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
+import {Router, useRouter} from 'next/navigation';
+
 
 export default function UploadPage() {
   const [image, setImage] = useState(null);
@@ -11,6 +13,7 @@ export default function UploadPage() {
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState('');
   const [restaurant, setRestaurant] = useState('');
+  const router = useRouter();
   
 
   const handleImageChange = (e) => {
@@ -59,7 +62,9 @@ export default function UploadPage() {
             if (response.ok){
                 alert("Failed");
             } else {
-                alert("Item added");
+                
+                router.push("/confetti");
+
             }
         }
     }catch(e){
