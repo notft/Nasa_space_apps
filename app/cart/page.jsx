@@ -170,7 +170,7 @@ export default function Cart() {
                 whileHover={{ scale: 1.05, backgroundColor: "#FF8C00" }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link href="/review">PLACE ORDER</Link>
+                <Link href="/confetti">PLACE ORDER</Link>
               </motion.button>
             </div>
           </div>

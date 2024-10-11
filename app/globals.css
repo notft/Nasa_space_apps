@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html, body {
-  overflow-y: scroll;
-}
+  overflow: auto;
+  /* overflow-x: hidden; */
+} 
 
 :root {
   --background: #ffffff;

@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Review() {
   const [ngoName, setNgoName] = useState('');
@@ -9,6 +10,7 @@ export default function Review() {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleRatingClick = (ratingValue) => {
     setRating(ratingValue);
@@ -23,7 +25,15 @@ export default function Review() {
   };
 
   const handleSubmit = () => {
+    // Check if NGO name and rating are provided
+    if (ngoName === '' || rating === 0) {
+      setError('Please provide both the NGO name and a rating.');
+      return; // Stop the function from proceeding
+    }
+
+    setError(''); // Clear error if validation passes
     setIsSubmitted(true);
+
     setTimeout(() => {
       alert(`Review Posted: \nNGO: ${ngoName}\nRating: ${rating}\nReview: ${reviewText}`);
       setIsSubmitted(false);
@@ -35,49 +45,52 @@ export default function Review() {
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        type: "spring",
+      transition: {
+        type: 'spring',
         stiffness: 100,
         damping: 15,
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const childVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        type: "spring",
+      transition: {
+        type: 'spring',
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center p-4">
-      <motion.div 
+      <motion.div
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.h1 
+        <motion.h1
           className="text-3xl font-semibold mb-6 text-gray-800"
           variants={childVariants}
         >
           Review
         </motion.h1>
 
+        {/* NGO Name Input */}
         <motion.div variants={childVariants}>
-          <label className="block text-gray-700 font-semibold mb-2" htmlFor="ngoName">NGO NAME</label>
+          <label className="block text-gray-700 font-semibold mb-2" htmlFor="ngoName">
+            NGO NAME
+          </label>
           <motion.input
             type="text"
             id="ngoName"
@@ -86,12 +99,15 @@ export default function Review() {
             onChange={(e) => setNgoName(e.target.value)}
             className="w-full text-black p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-orange-400"
             whileFocus={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           />
         </motion.div>
 
+        {/* Review Text Area */}
         <motion.div variants={childVariants}>
-          <label className="block text-gray-700 font-semibold mb-2" htmlFor="review">REVIEW</label>
+          <label className="block text-gray-700 font-semibold mb-2" htmlFor="review">
+            REVIEW
+          </label>
           <motion.textarea
             id="review"
             placeholder="Write your review"
@@ -99,10 +115,11 @@ export default function Review() {
             onChange={(e) => setReviewText(e.target.value)}
             className="w-full text-black p-3 border border-black rounded-lg mb-6 h-24 focus:outline-none focus:ring-2 focus:ring-orange-400"
             whileFocus={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           />
         </motion.div>
 
+        {/* Rating */}
         <motion.div variants={childVariants}>
           <label className="block text-gray-700 font-semibold mb-2">RATING</label>
           <div className="flex items-center mb-6">
@@ -124,16 +141,34 @@ export default function Review() {
           </div>
         </motion.div>
 
-        <motion.button
-          className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold text-xl hover:bg-orange-600 transition duration-300"
-          onClick={handleSubmit}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          variants={childVariants}
-        >
-          ADD REVIEW
-        </motion.button>
+        {/* Submit Button */}
+        <div>
+          <Link href='/home'>
+          <motion.button
+            className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold text-xl hover:bg-orange-600 transition duration-300"
+            onClick={handleSubmit}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            variants={childVariants}
+          >
+            ADD REVIEW
+          </motion.button>
+          </Link>  
+        </div>
 
+        {/* Error message */}
+        {error && (
+          <motion.p
+            className="text-red-500 text-center mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {error}
+          </motion.p>
+        )}
+
+        {/* Success message */}
         <AnimatePresence>
           {isSubmitted && (
             <motion.div
